@@ -1,4 +1,4 @@
-FROM openjdk:17-jdk-slim
-COPY target/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+FROM openjdk:17
+COPY target/taskmanager-1.0.jar taskmanager.jar
+CMD ["java", "-jar", "taskmanager.jar"]
 
