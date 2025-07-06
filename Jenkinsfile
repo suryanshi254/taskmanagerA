@@ -1,23 +1,31 @@
 pipeline {
     agent any
-
     stages {
+        stage('Clone') {
+            steps {
+                git 'https://github.com/suryanshi254/taskmanagerA.git'
+            }
+        }
         stage('Build') {
             steps {
-                sh './mvnw clean package'
+                sh 'mvn clean package'
             }
         }
-
         stage('Test') {
             steps {
-                sh './mvnw test'
+                sh 'mvn test'
             }
         }
-
-        stage('Run') {
+        stage('Docker Build') {
             steps {
-                sh 'java -jar target/*.jar &'
+                sh 'docker build -t taskmanager-app .'
+            }
+        }
+        stage('Deploy with Ansible') {
+            steps {
+                sh 'ansible-playbook deploy.yml'
             }
         }
     }
 }
+
