@@ -2,10 +2,12 @@ pipeline {
     agent any
     stages {
         stage('Clone') {
-            steps {
-                git 'https://github.com/suryanshi254/taskmanagerA.git'
-            }
-        }
+           stage('Clone') {
+    steps {
+        git branch: 'main', url: 'https://github.com/suryanshi254/taskmanagerA.git'
+    }
+}
+
         stage('Build') {
             steps {
                 sh 'mvn clean package'
