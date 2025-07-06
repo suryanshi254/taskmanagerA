@@ -1,0 +1,9 @@
+- name: Deploy TaskManager Docker Container
+  hosts: localhost
+  tasks:
+    - name: Stop existing container
+      shell: docker stop taskmanager || true && docker rm taskmanager || true
+
+    - name: Run new container
+      shell: docker run -d --name taskmanager -p 8081:8080 taskmanager-app
+
